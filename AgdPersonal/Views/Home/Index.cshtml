@@ -1,4 +1,4 @@
-﻿@model AgdPersonal.Entities.About
+﻿@model AgdPersonal.Models.IndexViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -63,11 +63,11 @@
             <div class="">
                 <span class="text">Hakkımda</span>
                 <h1 class="mb-4 title">
-                    <span class="type-js"><span class="text-js">@Model.Fullname</span></span><br>
-                    @Model.JobTitle
+                    <span class="type-js"><span class="text-js">@Model.About.Fullname</span></span><br>
+                    @Model.About.JobTitle
                 </h1>
                 <p class="mx-lg-5">
-                   @Model.Description
+                   @Model.About.Description
                 </p>
             </div>
             <div class="row">
@@ -93,24 +93,21 @@
             <div class="row">
                 <div class="col-lg-6">
                     <span class="text">Neler Yapıyorum?</span>
-                    <h3 class="title-big"><span>Profesyonel </span> Destek alın ve işlerinizi büyütün</h3>
+                    <h3 class="title-big">@Model.ServiceSlogan.Title
                     <p class="mt-4">
-                        Profesyonel olarak websitenizi tasarlayabilirim. Sistemleriniz ve domainleriniz için pentest hizmeti verebilirim.
-                        Ayrıca Siber güvenlik ve web alanında danışmanlık hizmeti sağlayabilirim..
+                     @Html.Raw(Model.ServiceSlogan.Description)
                     </p>
                     <ul class="service-list mt-md-5 mt-4">
-                        <li class="service-link"><a href="https://www.linkedin.com/in/ozan-agdepe/" target="_blank">Web Development Hizmeti</a></li>
-                        <li class="service-link"><a href="https://www.linkedin.com/in/ozan-agdepe/" target="_blank">Siber Güvenlik Destek Hizmeti</a></li>
-                        <li class="service-link"><a href="https://www.linkedin.com/in/ozan-agdepe/" target="_blank">Masaüstü ve Web Uygulaması Tasarımı</a></li>
-                        <li class="service-link"><a href="https://www.linkedin.com/in/ozan-agdepe/" target="_blank">Photoshop Ve Tasarım</a></li>
-                        <li class="service-link"><a href="https://www.linkedin.com/in/ozan-agdepe/" target="_blank">Pentest Ve Sunucu Güvenliği Hizmeti</a></li>
-                        <li class="service-link"><a href="https://www.linkedin.com/in/ozan-agdepe/" target="_blank">Ağ güvenliği hizmeti</a></li>
+
+                        @foreach (var item in Model.Services) {
+                        <li class="service-link"><a href="https://www.linkedin.com/in/ozan-agdepe/" target="_blank">@item.Title</a></li>
+                        }
                     </ul>
                     <a href="#url" class="btn btn-style btn-empty p-0">Tüm hizmetleri gör <span></span></a>
                 </div>
                 <div class="col-lg-6 mt-lg-0 mt-5">
                     <div class="position-relative">
-                        <img src="@Model.ImagePath" alt="" class="radius-image img-fluid">
+                        <img src="@Model.About.ImagePath" alt="" class="radius-image img-fluid">
                     </div>
                 </div>
             </div>
@@ -134,45 +131,36 @@
                     </div>
                 </div>
                 <div class="col-lg-6 mt-lg-0 mt-md-5 mt-4">
-                    <span class="text">Size Ne Vaad Ediyorum</span>
+                    <span class="text">Yetenekler</span>
                     <h3 class="title-big">
-                        Alacağınız hizmette <span>en güncel yöntemleri</span>
-                        kullanıyorum.
+                       @Model.SkillSlogan.Title
                     </h3>
                     <p class="mt-4">
-                        Firmanızın alacağı hizmette alanında en iyisi olması için gerekli her hizmeti sağlıyorum. Böylece hep 1 adım önde oluyorsunuz..
+                        @Model.SkillSlogan.Description
                     </p>
                     <div class="skills-bars mt-5">
-                        <div class="progress-info">
-                            <h6 class="progress-tittle">Web Development Hizmeti</h6>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+
+                        @foreach (var skill in Model.Skills)
+                        {
+
+                            <div class="progress-info">
+                                <h6 class="progress-tittle">@skill.Title</h6>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: @skill.Rate%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="progress-info">
-                            <h6 class="progress-tittle">
-                                Masaüstü ve Web Uygulaması Tasarımı
-                            </h6>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress-info">
-                            <h6 class="progress-tittle">Pentest Ve Sunucu Güvenliği Hizmeti</h6>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress-info mb-0">
-                            <h6 class="progress-tittle">Ağ güvenliği hizmeti</h6>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                                </div>
-                            </div>
-                        </div>
+
+
+
+                        }
+
+
+
+
+
+
+
                     </div>
                 </div>
             </div>

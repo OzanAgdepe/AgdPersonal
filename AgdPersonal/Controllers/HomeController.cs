@@ -1,5 +1,8 @@
 ﻿using AgdPersonal.Entities;
+using AgdPersonal.Extensions;
+using AgdPersonal.Models;
 using Dapper;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Web.Mvc;
 
@@ -12,8 +15,38 @@ namespace AgdPersonal.Controllers
 
             SqlConnection connection = new SqlConnection("server=.\\SQLExpress; database=AgdPersonDb; integrated security=true");
 
-            var data = connection.QueryFirst<About>(sql: "select * from Abouts");
+            var about = connection.QueryFirst<About>(sql: "select * from Abouts");
+            var skills = connection.Query<Skill>(sql: "ap_ListSkill", commandType:System.Data.CommandType.StoredProcedure);
 
+            var services = connection.Query<Service>(sql: "select * from Services");
+
+            var serviceSlogan = connection.QuerySingle<Slogan>(sql: "ap_ListSlogan", param:new { @sectionName="Services" }, commandType: System.Data.CommandType.StoredProcedure);
+            var skillSlogan = connection.QuerySingle<Slogan>(sql: "ap_ListSlogan", param: new { @sectionName = "Skills" }, commandType: System.Data.CommandType.StoredProcedure);
+
+
+            var viewModel = new IndexViewModel();
+            viewModel.About = about;
+            viewModel.Skills = skills;
+            viewModel.Services = services;
+            viewModel.ServiceSlogan = serviceSlogan;
+            viewModel.SkillSlogan= skillSlogan;
+
+            return View(viewModel);
+
+            //------------------------------------------------------------------------------
+            // c# extension METHOD ÖĞRENMEK İÇİN YAZILMIŞTIR.. 2 ÖNEMLİ ŞART -> STATİC OLMALI THiS KULLAN // Olan methoda özellik kazandırmak için kullanılır
+           
+            
+            //List<Skill> skills= new List<Skill>();
+            //skills.AddDuplicate(new Skill() { Id = 1, Rate = 70, Title = "Bu kayıttan 2 tane olması lazım" });
+
+            //List<About> abouts = new List<About>();
+            //abouts.AddDuplicate(new About { Id = 1 });
+
+            //var kayit = skills;
+            //var kayit2 = abouts;
+
+            //-------------------------------------------------------------------------------------//
 
             //SqlCommand cmd = new SqlCommand();
             //cmd.Connection=connection;
@@ -35,14 +68,7 @@ namespace AgdPersonal.Controllers
             //connection.Close();
             //reader.Close();
 
-            return View(data);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            return View(about);
         }
 
 
