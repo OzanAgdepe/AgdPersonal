@@ -123,9 +123,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AnasayfaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Entities\About.cs" />
+    <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\Service.cs" />
     <Compile Include="Entities\Skill.cs" />
     <Compile Include="Entities\Slogan.cs" />

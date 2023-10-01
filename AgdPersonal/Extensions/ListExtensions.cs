@@ -8,9 +8,9 @@ namespace AgdPersonal.Extensions
 {
     public static class ListExtensions          //Exentions method yazma /static olacak /this kullanacan /hem class hemde method static olmalı
     {
-        //public static void AddDuplicate(this List<Skill> skills, Skill skill)
+        //public static void AddDuplicate(this List<Skill> skills, Skill skill)  //neye özellik kazandırıyorsan onu this ile belirtecen, belirttiğin şey->
         //{
-        //    skills.Add(skill);
+        //    skills.Add(skill);   //statik olacak
         //    skills.Add(skill);
         //}
 

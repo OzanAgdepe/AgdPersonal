@@ -71,6 +71,22 @@ namespace AgdPersonal.Controllers
             return View(about);
         }
 
+        [HttpPost]
+        public ActionResult Contact(Contact contact)
+        {
+            SqlConnection connection = new SqlConnection("server=.\\SQLExpress; database=AgdPersonDb; integrated security=true");
+
+            var affectedRows = connection.Execute(sql: "ap_CreateContact", commandType: System.Data.CommandType.StoredProcedure, param: contact);
+
+            return RedirectToAction("Index");
+
+        }
+
+
+
+
+
+
 
         public ActionResult Portfolio()
         {
@@ -97,8 +113,8 @@ namespace AgdPersonal.Controllers
         }
 
         public ActionResult Contact()
-        {
-            return View();
+      {
+           return View();
 
 
         }
